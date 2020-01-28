@@ -9,11 +9,18 @@ public class ArduinoController : MonoBehaviour
 
 	public GameObject playerOne;
 	public GameObject playerTwo;
+	public GameObject playerThree;
 	public bool controllerActive = false;
 	public int commPort = 4;
 
-	private bool firstValue;
-	private int lastValue;
+	private bool firstValueP1 = true;
+	private int lastValueP1;
+
+	private bool firstValueP2 = true;
+	private int lastValueP2;
+
+	private bool firstValueP3 = true;
+	private int lastValueP3;
 
 	private SerialPort serial = null;
 	private bool connected = false;
@@ -48,7 +55,7 @@ public class ArduinoController : MonoBehaviour
 				// EXPECTED VALUE FORMAT: "0-1023"
 				string[] values = value.Split('-');     // split the values
 
-				if (values.Length == 2)
+				if (values.Length == 3)
 				{
 					positionPlayers(values);
 				}
@@ -61,28 +68,81 @@ public class ArduinoController : MonoBehaviour
 		if (playerOne != null)
 		{
 			int newValue = int.Parse(values[0]);
-			if (0 < newValue && newValue < 40)
+			if (0 < newValue && newValue < 30)
 			{
-				Debug.Log("Absoulte: " + Mathf.Abs(newValue - lastValue));
+				Debug.Log("Absoulte: " + Mathf.Abs(newValue - lastValueP1));
 				Debug.Log("Input Value: " + newValue);
 
 
-				if (Mathf.Abs(newValue - lastValue) < 2 || firstValue)
+				if (Mathf.Abs(newValue - lastValueP1) < 2 || firstValueP1)
 				{
-					float newYPosValue = Mathf.Lerp(newValue, lastValue, 0.5f);
-					float yPos = Remap(newYPosValue, 0, 30, 0.8f, 3.15f);         // scale the input. this could be done on the Arduino as well.
-					float xPos = Remap(newYPosValue, 0, 30, -3.9f, -1.45f);
+					float newYPosValue = Mathf.Lerp(newValue, lastValueP1, 0.5f);
+					float yPos = Remap(newYPosValue, 0, 30, 0f, 5.25f);         // scale the input. this could be done on the Arduino as well.
+					float xPos = Remap(newYPosValue, 0, 30, -7f, -2f);
 
 					Vector3 newPosition = new Vector3(xPos,       // create a new Vector for the position
 						yPos, playerOne.transform.position.z);
 
 					playerOne.transform.position = newPosition;        // apply the new position
-					if (firstValue)
+					if (firstValueP1)
 					{
-						firstValue = !firstValue;
+						firstValueP1 = !firstValueP1;
 					}
 				}
-				lastValue = int.Parse(values[0]);
+				lastValueP1 = int.Parse(values[0]);
+			}
+		}
+		if(playerTwo != null)
+		{
+			int newValue = int.Parse(values[1]);
+			if (0 < newValue && newValue < 30)
+			{
+				Debug.Log("Absoulte: " + Mathf.Abs(newValue - lastValueP2));
+				Debug.Log("Input Value: " + newValue);
+
+
+				if (Mathf.Abs(newValue - lastValueP2) < 2 || firstValueP2)
+				{
+					float newYPosValue = Mathf.Lerp(newValue, lastValueP2, 0.5f);
+					float yPos = Remap(newYPosValue, 0, 30, 0.6f, 4.78f);         // scale the input. this could be done on the Arduino as well.
+					float xPos = Remap(newYPosValue, 0, 30, -0.6f, -4.5f);
+
+					Vector3 newPosition = new Vector3(xPos,       // create a new Vector for the position
+						yPos, playerTwo.transform.position.z);
+
+					playerTwo.transform.position = newPosition;        // apply the new position
+					if (firstValueP2)
+					{
+						firstValueP2 = !firstValueP2;
+					}
+				}
+				lastValueP2 = int.Parse(values[1]);
+			}
+		}
+		if(playerThree != null)
+		{
+			int newValue = int.Parse(values[2]);
+			if (0 < newValue && newValue < 30)
+			{
+				Debug.Log("Absoulte: " + Mathf.Abs(newValue - lastValueP3));
+				Debug.Log("Input Value: " + newValue);
+
+
+				if (Mathf.Abs(newValue - lastValueP3) < 2 || firstValueP3)
+				{
+					float newYPosValue = Mathf.Lerp(newValue, lastValueP3, 0.5f);
+					float xPos = Remap(newYPosValue, 0, 30, -8.5f, -0.65f);        // scale the input. this could be done on the Arduino as well.
+
+					Vector3 newPosition = new Vector3(xPos,       // create a new Vector for the position
+						playerThree.transform.position.y, playerThree.transform.position.z);
+
+					playerThree.transform.position = newPosition;        // apply the new position
+					if (firstValueP3)
+					{
+						firstValueP3 = !firstValueP3;
+					}
+				}
+				lastValueP3 = int.Parse(values[2]);
 			}
 		}
 	}
