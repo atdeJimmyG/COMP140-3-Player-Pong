@@ -1,15 +1,27 @@
-const int trigPin = 10;
-const int echoPin = 9;
+const int trigPinP1 = 9;
+const int echoPinP1 = 10;
+
+const int trigPinP2 = 6;
+const int echoPinP2 = 5;
+
+const int trigPinP3 = 11;
+const int echoPinP3 = 3;
 
 int incomingByte;
 
 long duration;
 int distance;
+int distance2;
+int distance3;
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
+  pinMode(trigPinP1, OUTPUT);
+  pinMode(echoPinP1, INPUT);
+  pinMode(trigPinP2, OUTPUT);
+  pinMode(echoPinP2, INPUT);
+  pinMode(trigPinP3, OUTPUT);
+  pinMode(echoPinP3, INPUT);
   Serial.begin(9600);
 }
 
@@ -18,21 +30,42 @@ void loop() {
   if(Serial.available() > 0){
     incomingByte = Serial.read();
     
-    digitalWrite(trigPin, LOW);
+    digitalWrite(trigPinP1, LOW);
     delayMicroseconds(2);
   
-    digitalWrite(trigPin, HIGH);
+    digitalWrite(trigPinP1, HIGH);
     delayMicroseconds(10);
-    digitalWrite(trigPin, LOW);
+    digitalWrite(trigPinP1, LOW);
   
-    duration = pulseIn(echoPin, HIGH);
+    duration = pulseIn(echoPinP1, HIGH);
     distance = duration*0.034/2;
+
+    digitalWrite(trigPinP2, LOW);
+    delayMicroseconds(2);
   
-    //Serial.print("Distance: ");
+    digitalWrite(trigPinP2, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPinP2, LOW);
+  
+    duration = pulseIn(echoPinP2, HIGH);
+    distance2 = duration*0.034/2;
+
+    digitalWrite(trigPinP3, LOW);
+    delayMicroseconds(2);
+  
+    digitalWrite(trigPinP3, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPinP3, LOW);
+  
+    duration = pulseIn(echoPinP3, HIGH);
+    distance3 = duration*0.034/2;
     
     if(incomingByte == 'I'){
         Serial.print(distance);
-        Serial.println("-0");
+        Serial.print("-");
+        Serial.print(distance2);
+        Serial.print("-");
+        Serial.println(distance3);
     }
   }
 }
