@@ -7,11 +7,13 @@ using UnityEngine;
 public class ReloadScenes : MonoBehaviour
 {
 
+    public GameObject ball;
+
     void Update()
     {
-        if (GameObject.Find("Ball") == null)
+        if (GameObject.FindGameObjectWithTag("Ball") == null)
         {
-            SceneManager.LoadScene("SampleScene");
+            Instantiate(ball, new Vector3(0, 1, 0), Quaternion.identity);
         }
     }
 }

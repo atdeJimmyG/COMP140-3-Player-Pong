@@ -83,7 +83,7 @@ public class ArduinoController : MonoBehaviour
                     Vector3 newPosition = new Vector3(xPos,       // create a new Vector for the position
                         yPos, playerOne.transform.position.z);
 
-                    playerOne.transform.position = newPosition;        // apply the new position
+                    playerOne.transform.position = Vector3.Lerp(playerOne.transform.position, newPosition, Time.deltaTime * 10);     // apply the new position
                     if (firstValueP1)
                     {
                         firstValueP1 = !firstValueP1;
@@ -110,7 +110,7 @@ public class ArduinoController : MonoBehaviour
                     Vector3 newPosition = new Vector3(xPos,       // create a new Vector for the position
                         yPos, playerTwo.transform.position.z);
 
-                    playerTwo.transform.position = newPosition;        // apply the new position
+                    playerTwo.transform.position = Vector3.Lerp(playerTwo.transform.position, newPosition, Time.deltaTime * 10);        // apply the new position
                     if (firstValueP2)
                     {
                         firstValueP2 = !firstValueP2;
@@ -136,7 +136,7 @@ public class ArduinoController : MonoBehaviour
                     Vector3 newPosition = new Vector3(xPos,       // create a new Vector for the position
                         playerThree.transform.position.y, playerThree.transform.position.z);
 
-                    playerThree.transform.position = newPosition;        // apply the new position
+                    playerThree.transform.position = Vector3.Lerp(playerThree.transform.position, newPosition, Time.deltaTime * 10);        // apply the new position
                     if (firstValueP3)
                     {
                         firstValueP3 = !firstValueP3;
