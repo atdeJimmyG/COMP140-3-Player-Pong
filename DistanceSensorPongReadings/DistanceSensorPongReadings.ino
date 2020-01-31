@@ -33,42 +33,36 @@ void loop() {
     incomingByte = Serial.read();
 
     digitalWrite(trigPinP1, LOW);
-    delayMicroseconds(1);
+    delayMicroseconds(2);
 
     digitalWrite(trigPinP1, HIGH);
-    delayMicroseconds(2);
+    delayMicroseconds(10);
     digitalWrite(trigPinP1, LOW);
-//
-//    duration = pulseIn(echoPinP1, HIGH);
-//    distance = duration * 0.034 / 2;
+
+    duration = pulseIn(echoPinP1, HIGH);
+    distance = duration * 0.034 / 2;
 
     digitalWrite(trigPinP2, LOW);
-    delayMicroseconds(1);
+    delayMicroseconds(2);
 
     digitalWrite(trigPinP2, HIGH);
-    delayMicroseconds(2);
+    delayMicroseconds(10);
     digitalWrite(trigPinP2, LOW);
 
-//    duration2 = pulseIn(echoPinP2, HIGH);
-//    distance2 = duration * 0.034 / 2;
+    duration = pulseIn(echoPinP2, HIGH);
+    distance2 = duration * 0.034 / 2;
 
     digitalWrite(trigPinP3, LOW);
-    delayMicroseconds(1);
+    delayMicroseconds(2);
 
     digitalWrite(trigPinP3, HIGH);
-    delayMicroseconds(2);
+    delayMicroseconds(10);
     digitalWrite(trigPinP3, LOW);
 
-//    duration3 = pulseIn(echoPinP3, HIGH);
-//    distance3 = duration * 0.034 / 2;
+    duration = pulseIn(echoPinP3, HIGH);
+    distance3 = duration * 0.034 / 2;
 
     if (incomingByte == 'I') {
-      duration = pulseIn(echoPinP1, HIGH);
-      distance = duration * 0.034 / 2;
-      duration2 = pulseIn(echoPinP2, HIGH);
-      distance2 = duration * 0.034 / 2;
-      duration3 = pulseIn(echoPinP3, HIGH);
-      distance3 = duration * 0.034 / 2;
       Serial.print(distance);
       Serial.print("-");
       Serial.print(distance2);

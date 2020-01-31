@@ -74,11 +74,11 @@ public class ArduinoController : MonoBehaviour
                 Debug.Log("Input Value: " + newValue);
 
 
-                if (firstValueP1) //Mathf.Abs(newValue - lastValueP1) < 2 || 
+                if (true || firstValueP1) //Mathf.Abs(newValue - lastValueP1) < 2 || 
                 {
                     float newYPosValue = Mathf.Lerp(newValue, lastValueP1, 0.5f);
-                    float yPos = Remap(newYPosValue, 0, 30, 0f, 5.25f);         // scale the input. this could be done on the Arduino as well.
-                    float xPos = Remap(newYPosValue, 0, 30, -7f, -2f);
+                    float yPos = Remap(newYPosValue, 0, 30, -.5f, 3.15f);         // scale the input. this could be done on the Arduino as well.
+                    float xPos = Remap(newYPosValue, 0, 30, -4f, 0f);
 
                     Vector3 newPosition = new Vector3(xPos,       // create a new Vector for the position
                         yPos, playerOne.transform.position.z);
@@ -101,11 +101,11 @@ public class ArduinoController : MonoBehaviour
                 Debug.Log("Input Value: " + newValue);
 
 
-                if (firstValueP2) //Mathf.Abs(newValue - lastValueP2) < 2 || 
+                if (true || firstValueP2) //Mathf.Abs(newValue - lastValueP2) < 2 || 
                 {
                     float newYPosValue = Mathf.Lerp(newValue, lastValueP2, 0.5f);
-                    float yPos = Remap(newYPosValue, 0, 30, 0.6f, 4.78f);         // scale the input. this could be done on the Arduino as well.
-                    float xPos = Remap(newYPosValue, 0, 30, -0.6f, -4.5f);
+                    float yPos = Remap(newYPosValue, 0, 30, 4.78f, -1f);         // scale the input. this could be done on the Arduino as well.
+                    float xPos = Remap(newYPosValue, 0, 30, -0.6f, 4.5f);
 
                     Vector3 newPosition = new Vector3(xPos,       // create a new Vector for the position
                         yPos, playerTwo.transform.position.z);
@@ -128,7 +128,7 @@ public class ArduinoController : MonoBehaviour
                 Debug.Log("Input Value: " + newValue);
 
 
-                if (firstValueP3) //Mathf.Abs(newValue - lastValueP3) < 2 ||
+                if (true || firstValueP3) //Mathf.Abs(newValue - lastValueP3) < 2 ||
                 {
                     float newYPosValue = Mathf.Lerp(newValue, lastValueP3, 0.5f);
                     float xPos = Remap(newYPosValue, 0, 40, 3f, -3f);        // scale the input. this could be done on the Arduino as well.
@@ -153,7 +153,7 @@ public class ArduinoController : MonoBehaviour
         serial.BaseStream.Flush();
     }
 
-    public string ReadFromArduino(int timeout = 0)
+    public string ReadFromArduino(int timeout)
     {
         serial.ReadTimeout = timeout;
         try
