@@ -35,7 +35,7 @@ public class BallScript : MonoBehaviour
             lastPlayerToHit = 3;
         }
 
-        if (collision.gameObject.name == "Wall")
+        if (collision.gameObject.tag == "Wall")
         {
             Score();
         }
@@ -48,12 +48,12 @@ public class BallScript : MonoBehaviour
             GameControlller.player1Score += 1;
             Debug.Log(GameControlller.player1Score);
         }
-        else if(lastPlayerToHit == 2)
+        else if (lastPlayerToHit == 2)
         {
             GameControlller.player2Score += 1;
             Debug.Log(GameControlller.player2Score);
         }
-        else
+        else if (lastPlayerToHit == 3)
         {
             GameControlller.player3Score += 1;
             Debug.Log(GameControlller.player3Score);
